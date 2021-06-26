@@ -17,11 +17,10 @@ from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth.forms import PasswordResetForm
 from django.db.models.query_utils import Q
 from django.contrib.auth import update_session_auth_hash
-
+from django.db.models import Q
 
 #-------------------------------------------------------------------------
 #-------------------------------------------------------------------------
-
 
 class HomeView(ListView):
 	model = tacos
@@ -45,6 +44,18 @@ class lonchesView(ListView):
 
 #-------------------------------------------------------------------------
 #-------------------------------------------------------------------------
+
+#Seccion o parte de busquedas con Q
+
+def home(request):
+	queryset = request.GET.get("buscar")
+	posts = Post.objects.filter(estado = True)
+	if queryset:
+		posts = Post.objects.filter(
+			Q(nomb__icontains = queryset) |
+			Q(descr__icontains = queryset)
+		).distinct()
+	return render(request, 'home.html', {'posts':posts})
 
 #INICIAR SESION Y REGISTRAR USUARIO
 class RegistrarPageView (CreateView):

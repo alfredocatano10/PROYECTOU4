@@ -4,7 +4,31 @@
 
 <div class="jumbotron p-4">
     
-    <center><h1>Bienvenidos a nuestro centro de comida</h1></center><hr>
+    <center><h1>COME CHIDO POR TORREON</h1></center><hr>
+
+    {% block barra_busqueda %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 search">
+                <form method="get">
+                    <div id="custom-search-input">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control" placeholder="Buscar..." name="buscar" value = "{{ request.GET.buscar }}">
+                            <span class="input-group-list">
+                                <i class="icon icon-search"></i>
+                                <button type="submit" class="boton btn-success">BUSCAR</button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock barra_busqueda %}
+
+    <div>
+
+    </div>
 
     <div class="row">
     	<img src="{% static 'img/centro.png' %}" height="430px"
